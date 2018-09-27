@@ -21,6 +21,34 @@ def linear_search(lst: list, x) -> int:
     return -1
 
 
+def bubble_sort(lst: list) -> list:
+    """Sort a list in ascending order.
+
+    Design idea: Swap adjacent out-of-order elements until the list is sorted.
+
+    Complexity: O(n^2) time, O(1) space. Stable and in-place.
+
+    See quicksort, merge sort and heapsort for sorting algorithms with a better
+    time complexity.
+    """
+    # The first iteration will bring the largest element to the end, the second
+    # iteration will bring the second largest element to the end - 1, and so on,
+    # so we need no more than n iterations to put every element in the proper
+    # place.
+    for _ in range(len(lst)):
+        swapped = False
+        for i in range(1, len(lst)):
+            # If you changed this comparison to >=, the algorithm would still
+            # be correct but the sort would no longer be stable.
+            if lst[i-1] > lst[i]:
+                lst[i-1], lst[i] = lst[i], lst[i-1]
+                swapped = True
+        # If no swaps occurred, the list is sorted and we can exit early.
+        if not swapped:
+            break
+    return lst
+
+
 def selection_sort(lst: list) -> list:
     """Sort a list in ascending order.
 
@@ -29,14 +57,17 @@ def selection_sort(lst: list) -> list:
     Continue until you reach the end, at which point the list will be sorted.
 
     Complexity: O(n^2) time, O(1) space. Stable and in-place.
+    
+    See quicksort, merge sort and heapsort for sorting algorithms with a better
+    time complexity.
     """
     for i in range(len(lst)):
         minimum = lst[i]
         minimum_index = i
         # Find the minimum element in the rest of the list.
         for j in range(i+1, len(lst)):
-            # If you changed this comparison to <=, the algorithm would still
-            # be correct but the sort would no longer be stable.
+            # As in bubble sort, this must be < and not <= for the sort to be
+            # stable.
             if lst[j] < minimum:
                 minimum = lst[j]
                 minimum_index = j

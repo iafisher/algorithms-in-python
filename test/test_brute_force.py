@@ -1,6 +1,6 @@
 import unittest
 
-from algorithms.brute_force import linear_search, selection_sort
+from algorithms.brute_force import bubble_sort, linear_search, selection_sort
 from .helper import StableSortTestBase
 
 
@@ -20,6 +20,11 @@ class LinearSearchTest(unittest.TestCase):
 class SelectionSortTest(unittest.TestCase, StableSortTestBase):
     def setUp(self):
         self.algorithm = selection_sort
+
+
+class BubbleSortTest(unittest.TestCase, StableSortTestBase):
+    def setUp(self):
+        self.algorithm = bubble_sort
 
 
 if __name__ == '__main__':

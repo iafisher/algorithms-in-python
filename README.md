@@ -4,10 +4,10 @@ An educational project to implement all the algorithms from Anany Levitin's *[In
 ## Algorithms implemented
 - Linear search
 - Selection sort
+- Bubble sort
 
 ## Algorithms to do
 Brute force and exhaustive search
-- Bubble sort
 - String matching
 - Closest pair (by brute force)
 - Convex hull (by brute force)
