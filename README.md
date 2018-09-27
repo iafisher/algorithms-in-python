@@ -2,13 +2,12 @@
 An educational project to implement all the algorithms from Anany Levitin's *[Introduction to the Design and Analysis of Algorithms](https://www.amazon.com/Introduction-Design-Analysis-Algorithms-3rd/dp/0132316811)* in Python.
 
 ## Algorithms implemented
-None yet!
+- Linear search
 
 ## Algorithms to do
 Brute force and exhaustive search
 - Selection sort
 - Bubble sort
-- Linear search
 - String matching
 - Closest pair (by brute force)
 - Convex hull (by brute force)
