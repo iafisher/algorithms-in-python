@@ -8,6 +8,7 @@ Searching
 
 Sorting
 - Bubble sort
+- Insertion sort
 - Selection sort
 
 ## Algorithms to do
@@ -21,7 +22,6 @@ Brute force and exhaustive search
 - Breadth-first search
 
 Decrease-and-conquer
-- Insertion sort
 - Topological sorting
 - Generating permutations
 - Generating subsets
