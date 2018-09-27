@@ -5,6 +5,9 @@ are often simple to design and implement, but computationally expensive.
 Backtracking, branch-and-bound and approximation can be used to improve the
 performance of brute-force algorithms for problems with no known better
 algorithms.
+
+Author:  Ian Fisher (iafisher@protonmail.com)
+Version: September 2018
 """
 
 def linear_search(lst: list, x) -> int:

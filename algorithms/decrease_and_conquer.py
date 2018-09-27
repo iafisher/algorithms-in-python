@@ -3,6 +3,9 @@ into a smaller version of the same problem. For example, a^n can be computed by
 first computing a^(n-1) and then multiplying by a. Decrease-and-conquer
 algorithms are naturally expressed with recursion, although iterative
 implementations may be more efficient.
+
+Author:  Ian Fisher (iafisher@protonmail.com)
+Version: September 2018
 """
 
 def insertion_sort(lst: list) -> list:
