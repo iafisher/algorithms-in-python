@@ -1,7 +1,9 @@
 import unittest
 
-from algorithms.brute_force import bubble_sort, linear_search, selection_sort
-from .helper import StableSortTestBase
+from algorithms.brute_force import (
+    bubble_sort, find_substring, linear_search, selection_sort
+)
+from .helper import FindSubstringTestBase, StableSortTestBase
 
 
 class LinearSearchTest(unittest.TestCase):
@@ -25,6 +27,11 @@ class SelectionSortTest(unittest.TestCase, StableSortTestBase):
 class BubbleSortTest(unittest.TestCase, StableSortTestBase):
     def setUp(self):
         self.algorithm = bubble_sort
+
+
+class FindSubstringTest(unittest.TestCase, FindSubstringTestBase):
+    def setUp(self):
+        self.algorithm = find_substring
 
 
 if __name__ == '__main__':

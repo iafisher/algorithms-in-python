@@ -75,3 +75,24 @@ def selection_sort(lst: list) -> list:
         # first i elements of the list will not change after this iteration.
         lst[i], lst[minimum_index] = lst[minimum_index], lst[i]
     return lst
+
+
+def find_substring(text, pattern):
+    """Return the index of the first character of the first occurrence of
+    `pattern` as a subsequence of `text`. If `pattern` never occurs, return -1.
+
+    Design idea: For each character of the text that matches the first character
+    of the pattern, check if the subsequent characters also match.
+
+    Complexity: O(n*m) time, O(1) space.
+    """
+    if len(pattern) == 0:
+        return 0
+
+    for i in range(len(text) - len(pattern) + 1):
+        for j in range(len(pattern)):
+            if text[i+j] != pattern[j]:
+                break
+            elif j == len(pattern) - 1:
+                return i
+    return -1

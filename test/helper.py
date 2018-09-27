@@ -1,20 +1,22 @@
+"""Collected test cases for problems with multiple algorithms solving them.
+
+Use these classes by inheriting from them and unittest.TestCase, and defining a
+setUp method that sets `self.algorithm` to the desired algorithm, e.g.
+
+class BogoSortTest(unittest.TestCase, SortTestBase):
+    def setUp(self):
+        self.algorithm = bogosort
+
+"""
 import functools
 import unittest
 
 
 class SortTestBase:
-    """A base class for testing sorting algorithms. Subclasses should define a
-    setUp method which sets `self.algorithm` to the sorting function to be
-    tested. They also need to inherit from unittest.TestCase, so the minimal
-    working example is
-
-    class BogoSortTest(unittest.TestCase, SortTestBase):
-        def setUp(self):
-            self.algorithm = bogosort
-
-    The sorting algorithm should take a list of orderable values as its only
-    argument, and return the list sorted in ascending order. The sort does not
-    have to be stable.
+    """A base class for testing sorting algorithms. The sorting algorithm should
+    take a list of orderable values as its only argument, and return the list
+    sorted in ascending order. The sort should not be stable. For stable sorts,
+    use StableSortTestBase instead.
     """
 
     def test_basic(self):
@@ -69,7 +71,7 @@ class SortTestBase:
 
 
 class StableSortTestBase(SortTestBase):
-    """Same as SortTestBase, but for stable sorts."""
+    """Same as SortTestBase, but with additional tests for stable sorts."""
 
     def test_sort_stability(self):
         b = DummyObject('b')
@@ -96,6 +98,10 @@ class StableSortTestBase(SortTestBase):
 
 @functools.total_ordering
 class DummyObject:
+    """A dummy object for testing sort stability. Defined so that `x == y` does
+    not imply `x is y`.
+    """
+
     def __init__(self, data):
         self.data = data
 
@@ -107,3 +113,35 @@ class DummyObject:
 
     def __repr__(self):
         return f'<DummyObject({repr(self.data)}) at {hex(id(self))}>'
+
+
+class FindSubstringTestBase:
+    """A base class for testing string matching algorithms. The algorithm should
+    take two arguments, a text and a pattern, and return the index of the first
+    letter of the first occurrence of the pattern in the text, or -1 if the
+    pattern does not occur.
+    """
+
+    def test_one_letter_pattern(self):
+        self.assertEqual(self.algorithm('abc', 'c'), 2)
+
+    def test_multi_letter_pattern(self):
+        self.assertEqual(self.algorithm('racecar', 'ace'), 1)
+
+    def test_empty_text(self):
+        self.assertEqual(self.algorithm('', 'datum'), -1)
+
+    def test_empty_pattern(self):
+        self.assertEqual(self.algorithm('Lorem ipsum', ''), 0)
+
+    def test_pattern_equals_text(self):
+        self.assertEqual(self.algorithm('twin', 'twin'), 0)
+
+    def test_pattern_longer_than_text(self):
+        self.assertEqual(self.algorithm('Guinea', 'Guinea-Bissau'), -1)
+
+    def test_almost_match(self):
+        self.assertEqual(self.algorithm('water bottle', 'waiter'), -1)
+
+    def test_another_almost_match(self):
+        self.assertEqual(self.algorithm('cockpit', 'pita'), -1)
