@@ -1,6 +1,12 @@
 # Algorithms in Python
 An educational project to implement all the algorithms from Anany Levitin's *[Introduction to the Design and Analysis of Algorithms](https://www.amazon.com/Introduction-Design-Analysis-Algorithms-3rd/dp/0132316811)* in Python.
 
+The code for the algorithms is in the `algorithms` package, organized by design pattern along the same lines as Levitin's textbook. Tests can be run from the root of the project with [nose2](https://nose2.readthedocs.io/en/latest/):
+
+```shell
+$ nose2
+```
+
 ## Algorithms implemented
 Searching
 - Linear search
