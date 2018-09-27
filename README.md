@@ -3,10 +3,10 @@ An educational project to implement all the algorithms from Anany Levitin's *[In
 
 ## Algorithms implemented
 - Linear search
+- Selection sort
 
 ## Algorithms to do
 Brute force and exhaustive search
-- Selection sort
 - Bubble sort
 - String matching
 - Closest pair (by brute force)

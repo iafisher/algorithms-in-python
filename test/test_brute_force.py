@@ -1,6 +1,7 @@
 import unittest
 
-from algorithms.brute_force import linear_search
+from algorithms.brute_force import linear_search, selection_sort
+from .helper import StableSortTestBase
 
 
 class LinearSearchTest(unittest.TestCase):
@@ -14,6 +15,11 @@ class LinearSearchTest(unittest.TestCase):
         lst = [1, 2, 3, 4, 5]
         self.assertEqual(linear_search(lst, 6), -1)
         self.assertEqual(linear_search(lst, 'not me'), -1)
+
+
+class SelectionSortTest(unittest.TestCase, StableSortTestBase):
+    def setUp(self):
+        self.algorithm = selection_sort
 
 
 if __name__ == '__main__':
