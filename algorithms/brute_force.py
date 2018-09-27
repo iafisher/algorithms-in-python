@@ -80,7 +80,7 @@ def selection_sort(lst: list) -> list:
     return lst
 
 
-def find_substring(text, pattern):
+def find_substring(text: str, pattern: str) -> int:
     """Return the index of the first character of the first occurrence of
     `pattern` as a subsequence of `text`. If `pattern` never occurs, return -1.
 
