@@ -124,13 +124,47 @@ def depth_first_search(graph):
             yield from depth_first_search_helper(graph, source, visited)
 
 
-def depth_first_search_helper(graph, vertex, visited):
+def depth_first_search_helper(graph, source, visited):
     """Yield every vertex in the graph in depth-first order connected to the
     given vertex. `visited` should be a dictionary from vertices to booleans
     that indicate whether a vertex has been visited before.
     """
-    yield vertex
-    visited[vertex] = True
-    for neighbor in graph[vertex]:
+    yield source
+    visited[source] = True
+    for neighbor in graph[source]:
         if not visited[neighbor]:
             yield from depth_first_search_helper(graph, neighbor, visited)
+
+
+def breadth_first_search(graph):
+    """Yield every vertex in the graph (represented as an adjacency list) in
+    breadth-first order, i.e. starting at an arbitrary root and visiting each of
+    its neighbors before visiting the neighbors of the root's first neighbors,
+    and so on.
+
+    Design idea: Similar to depth-first search, we will use a helper function
+    to visit all the vertices of a connected subgraph.
+
+    Complexity: O(|V| + |E|) time, O(|V|) space.
+    """
+    visited = {v: False for v in graph}
+    for source in graph:
+        if not visited[source]:
+            yield from breadth_first_search_helper(graph, source, visited)
+
+
+def breadth_first_search_helper(graph, source, visited):
+    """Yield every vertex in the graph in breadth-first order connected to the
+    given vertex. `visited` should be a dictionary from vertices to booleans
+    that indicate whether a vertex has been visited before.
+    """
+    yield source
+    visited[source] = True
+    queue = [source]
+    while queue:
+        vertex = queue.pop(0)
+        for neighbor in graph[vertex]:
+            if not visited[neighbor]:
+                yield neighbor
+                visited[neighbor] = True
+                queue.append(neighbor)

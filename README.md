@@ -9,6 +9,7 @@ $ nose2
 
 ## Algorithms implemented
 Graph
+- Breadth-first search
 - Depth-first search
 
 Searching
@@ -28,7 +29,6 @@ Brute force and exhaustive search
 - Traveling salesman
 - Knapsack problem
 - Assignment problem
-- Breadth-first search
 
 Decrease-and-conquer
 - Topological sorting
