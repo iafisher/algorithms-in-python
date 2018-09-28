@@ -195,3 +195,68 @@ def closest_pair(points: list) -> tuple:
                 closest_distance = distance
                 closest_pair = (p1, p2)
     return closest_pair
+
+
+def convex_hull(points: list) -> set:
+    """Return the set of points comprising the convex hull of the given points.
+    The convex hull is the smallest convex (i.e., the perimeter has no
+    indentations) set that encloses all the points.
+
+    Design idea: The brute-force algorithm exploits the fact that any two points
+    p1 and p2 are part of the convex hull iff all other points lie on the same
+    side of the line through p1 and p2. This test can be repeated for every pair
+    of points to find the convex hull.
+
+    Complexity: O(n^3) time, O(1) space.
+    """
+    if len(points) < 3:
+        return set(points)
+
+    convex_hull = set()
+    for i, p1 in enumerate(points):
+        for j, p2 in enumerate_slice(points, i+1):
+            sign = None
+            # The equation ax+by = c divides the plane into two half-planes:
+            # one containing points for which ax+by > c and the other containing
+            # points for which ax+by < c.
+            a = p2[1] - p1[1]
+            b = p1[0] - p2[0]
+            c = p1[0]*p2[1] - p1[1]*p2[0]
+            for p3 in points:
+                if p3 == p1 or p3 == p2:
+                    continue
+                side = a*p3[0] + b*p3[1] - c
+                if not sign:
+                    sign = side
+                elif not (
+                    (side < 0 and sign < 0) or (side == 0 and sign == 0)
+                    or (side > 0 and sign > 0)
+                ):
+                    break
+            else:
+                # The else case is run only when the loop exits normally and not
+                # through a break statement.
+                if side == 0:
+                    # In the case that all of the points lie on the same line,
+                    # the convex hull is just the endpoints of the line.
+                    return find_endpoints(points)
+                else:
+                    convex_hull.add(p1)
+                    convex_hull.add(p2)
+    return convex_hull
+
+
+def find_endpoints(points: list) -> set:
+    """Given a non-empty list of two-dimensional points on the same line, return
+    the endpoints of the line.
+    """
+    max_x = points[0][0]
+    max_x_point = points[0]
+    min_x = points[0][0]
+    min_x_point = points[0]
+    for i, p in enumerate_slice(points, 1):
+        if p[0] > max_x:
+            max_x_point = p
+        elif p[0] < min_x:
+            min_x_point = p
+    return {max_x_point, min_x_point}

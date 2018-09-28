@@ -1,12 +1,12 @@
 import unittest
 
 from algorithms.brute_force import (
-    breadth_first_search, bubble_sort, closest_pair, depth_first_search,
-    find_substring, linear_search, selection_sort
+    breadth_first_search, bubble_sort, closest_pair, convex_hull,
+    depth_first_search, find_substring, linear_search, selection_sort
 )
 from .helper import (
-    ClosestPairTestBase, FindSubstringTestBase, StableSortTestBase, GRAPH_3_10,
-    GRAPH_3_12A, GRAPH_3_12B
+    ClosestPairTestBase, ConvexHullTestBase, FindSubstringTestBase,
+    StableSortTestBase, GRAPH_3_10, GRAPH_3_12A, GRAPH_3_12B
 )
 
 
@@ -73,3 +73,8 @@ class BreadthFirstSearchTest(unittest.TestCase):
 class ClosestPairTest(unittest.TestCase, ClosestPairTestBase):
     def setUp(self):
         self.algorithm = closest_pair
+
+
+class ConvexHullTest(unittest.TestCase, ConvexHullTestBase):
+    def setUp(self):
+        self.algorithm = convex_hull

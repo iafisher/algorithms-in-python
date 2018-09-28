@@ -10,6 +10,7 @@ $ nose2
 ## Algorithms implemented
 Geometry
 - Closest pair (brute force)
+- Convex hull (by brute force)
 
 Graph
 - Breadth-first search
@@ -27,7 +28,6 @@ Sorting
 
 ## Algorithms to do
 Brute force and exhaustive search
-- Convex hull (by brute force)
 - Traveling salesman
 - Knapsack problem
 - Assignment problem
