@@ -8,6 +8,35 @@ Author:  Ian Fisher (iafisher@protonmail.com)
 Version: September 2018
 """
 
+
+def binary_search(lst: list, x) -> int:
+    """Return the index of the first element of the sorted list `lst` equal to
+    `x`, or -1 if no elements of `lst` are equal to `x`.
+
+    Design idea: Compare the given element with the midpoint element of the
+    list. If the element is less than the midpoint, then recursively search the
+    left half. If the element is greater, then recursively search the right
+    half.
+
+    Complexity: O(log n) time, O(1) space.
+    """
+    # `lo` is the first index of the list still under consideration, and `hi` is
+    # one past the last index under consideration. `hi - lo` will always be the
+    # number of elements under consideration.
+    lo = 0
+    hi = len(lst)
+    while lo < hi:
+        mid = (lo + hi) // 2
+        # Use the comparison with the midpoint to rule out half the list.
+        if x == lst[mid]:
+            return mid
+        elif x < lst[mid]:
+            hi = mid
+        else:
+            lo = mid + 1
+    return -1
+
+
 def insertion_sort(lst: list) -> list:
     """Sort a list in ascending order.
 

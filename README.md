@@ -9,6 +9,7 @@ $ nose2
 
 ## Algorithms implemented
 Searching
+- Binary search
 - Linear search
 - String matching (brute force)
 
@@ -31,7 +32,6 @@ Decrease-and-conquer
 - Topological sorting
 - Generating permutations
 - Generating subsets
-- Binary search
 - Fake-coin problem
 - Russian peasant multiplication
 - Josephus problem

@@ -17,6 +17,9 @@ def linear_search(lst: list, x) -> int:
     Design idea: Scan the list from start to finish.
 
     Complexity: O(n) time, O(1) space.
+
+    For an improvement on linear search for sorted lists, see the binary search
+    function in the decrease_and_conquer module.
     """
     for i, y in enumerate(lst):
         if x == y:
