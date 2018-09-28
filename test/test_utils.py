@@ -1,21 +1,21 @@
 import unittest
 
-from algorithms.utils import enumerate_slice
+from algorithms.utils import iterate_slice
 
 
-class EnumerateSliceTest(unittest.TestCase):
+class IterateSliceTest(unittest.TestCase):
     def test_slice_off_beginning(self):
-        slce = list(enumerate_slice(['a', 'b', 'c', 'd'], 1))
-        self.assertEqual(slce, [(1, 'b'), (2, 'c'), (3, 'd')])
+        slce = list(iterate_slice(['a', 'b', 'c', 'd'], 1))
+        self.assertEqual(slce, ['b', 'c', 'd'])
 
     def test_slice_off_end(self):
-        slce = list(enumerate_slice(['a', 'b', 'c', 'd'], 0, 3))
-        self.assertEqual(slce, [(0, 'a'), (1, 'b'), (2, 'c')])
+        slce = list(iterate_slice(['a', 'b', 'c', 'd'], 0, 3))
+        self.assertEqual(slce, ['a', 'b', 'c'])
 
     def test_slice_off_beginning_and_end(self):
-        slce = list(enumerate_slice(['a', 'b', 'c', 'd'], 1, 3))
-        self.assertEqual(slce, [(1, 'b'), (2, 'c')])
+        slce = list(iterate_slice(['a', 'b', 'c', 'd'], 1, 3))
+        self.assertEqual(slce, ['b', 'c'])
 
     def test_slice_whole_list(self):
-        slce = list(enumerate_slice(['a', 'b', 'c', 'd'], 0))
-        self.assertEqual(slce, [(0, 'a'), (1, 'b'), (2, 'c'), (3, 'd')])
+        slce = list(iterate_slice(['a', 'b', 'c', 'd'], 0))
+        self.assertEqual(slce, ['a', 'b', 'c', 'd'])

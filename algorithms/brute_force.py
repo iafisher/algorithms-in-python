@@ -10,7 +10,7 @@ Author:  Ian Fisher (iafisher@protonmail.com)
 Version: September 2018
 """
 
-from .utils import enumerate_slice
+from .utils import iterate_slice
 
 
 def linear_search(lst: list, x) -> int:
@@ -187,7 +187,7 @@ def closest_pair(points: list) -> tuple:
     closest_distance = None
     closest_pair = None
     for i, p1 in enumerate(points):
-        for j, p2 in enumerate_slice(points, i+1):
+        for p2 in iterate_slice(points, i+1):
             # Note that for comparison purposes we do not need to compute the
             # square root to get the actual distance.
             distance = (p1[0] - p2[0])**2 + (p1[1] - p2[1])**2
@@ -214,7 +214,7 @@ def convex_hull(points: list) -> set:
 
     convex_hull = set()
     for i, p1 in enumerate(points):
-        for j, p2 in enumerate_slice(points, i+1):
+        for p2 in iterate_slice(points, i+1):
             sign = None
             # The equation ax+by = c divides the plane into two half-planes:
             # one containing points for which ax+by > c and the other containing
@@ -254,7 +254,7 @@ def find_endpoints(points: list) -> set:
     max_x_point = points[0]
     min_x = points[0][0]
     min_x_point = points[0]
-    for i, p in enumerate_slice(points, 1):
+    for p in iterate_slice(points, 1):
         if p[0] > max_x:
             max_x_point = p
         elif p[0] < min_x:
