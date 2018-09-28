@@ -257,6 +257,8 @@ def find_endpoints(points: list) -> set:
     for p in iterate_slice(points, 1):
         if p[0] > max_x:
             max_x_point = p
+            max_x = p[0]
         elif p[0] < min_x:
             min_x_point = p
+            min_x = p[0]
     return {max_x_point, min_x_point}

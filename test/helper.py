@@ -244,6 +244,10 @@ class ConvexHullTestBase:
         points = [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)]
         self.assertEqual(self.algorithm(points), {(0, 0), (5, 5)})
 
+    def test_six_points_in_a_line_out_of_order(self):
+        points = [(5, 5), (4, 4), (3, 3), (2, 2), (0, 0), (1, 1)]
+        self.assertEqual(self.algorithm(points), {(0, 0), (5, 5)})
+
 
 # Figure 3.10 on page 123
 GRAPH_3_10 = {
