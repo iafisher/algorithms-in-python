@@ -8,6 +8,9 @@ $ nose2
 ```
 
 ## Algorithms implemented
+Graph
+- Depth-first search
+
 Searching
 - Binary search
 - Linear search
@@ -25,7 +28,6 @@ Brute force and exhaustive search
 - Traveling salesman
 - Knapsack problem
 - Assignment problem
-- Depth-first search
 - Breadth-first search
 
 Decrease-and-conquer

@@ -145,3 +145,43 @@ class FindSubstringTestBase:
 
     def test_another_almost_match(self):
         self.assertEqual(self.algorithm('cockpit', 'pita'), -1)
+
+
+# Figure 3.10 on page 123
+GRAPH_3_10 = {
+    'a': ['c', 'd', 'e'],
+    'b': ['e', 'f'],
+    'c': ['a', 'd', 'f'],
+    'd': ['a', 'c'],
+    'e': ['a', 'b', 'f'],
+    'f': ['b', 'c', 'e'],
+    'g': ['h', 'j'],
+    'h': ['i', 'g'],
+    'i': ['h', 'j'],
+    'j': ['i', 'g'],
+}
+
+
+# Figure 3.12a on page 127
+GRAPH_3_12A = {
+    'a': ['b', 'e'],
+    'b': ['a', 'c', 'f'],
+    'c': ['b', 'd', 'g'],
+    'd': ['c', 'h'],
+    'e': ['a', 'f'],
+    'f': ['b', 'e', 'g'],
+    'g': ['c', 'f', 'h'],
+    'h': ['d', 'g'],
+}
+
+
+# Figure 3.12b on page 127
+GRAPH_3_12B = {
+    'a': ['b', 'e'],
+    'b': ['a', 'c', 'f'],
+    'c': ['b', 'd', 'g'],
+    'd': ['c'],
+    'e': ['a'],
+    'f': ['b'],
+    'g': ['c'],
+}

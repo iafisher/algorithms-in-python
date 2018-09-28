@@ -102,3 +102,35 @@ def find_substring(text: str, pattern: str) -> int:
             elif j == len(pattern) - 1:
                 return i
     return -1
+
+
+def depth_first_search(graph):
+    """Yield every vertex in the graph (represented as an adjacency list) in
+    depth-first order, i.e. starting at an arbitrary root and exploring as far
+    as possible down each branch before backtracking.
+
+    Design idea: We will make use of a recursive helper function that performs
+    the DFS traversal of a connected subgraph rooted at a particular vertex.
+    This function works by iterating over the vertex's neighbors and recursively
+    traversing them. We will also need a dictionary to keep track of which
+    vertices have been visited already, so that cycles in the graph will not
+    cause the function to recurse infinitely.
+
+    Complexity: O(|V| + |E|) time, O(|V|) space.
+    """
+    visited = {v: False for v in graph}
+    for source in graph:
+        if not visited[source]:
+            yield from depth_first_search_helper(graph, source, visited)
+
+
+def depth_first_search_helper(graph, vertex, visited):
+    """Yield every vertex in the graph in depth-first order connected to the
+    given vertex. `visited` should be a dictionary from vertices to booleans
+    that indicate whether a vertex has been visited before.
+    """
+    yield vertex
+    visited[vertex] = True
+    for neighbor in graph[vertex]:
+        if not visited[neighbor]:
+            yield from depth_first_search_helper(graph, neighbor, visited)

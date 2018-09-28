@@ -1,9 +1,13 @@
 import unittest
 
 from algorithms.brute_force import (
-    bubble_sort, find_substring, linear_search, selection_sort
+    bubble_sort, depth_first_search, find_substring, linear_search,
+    selection_sort
 )
-from .helper import FindSubstringTestBase, StableSortTestBase
+from .helper import (
+    FindSubstringTestBase, StableSortTestBase, GRAPH_3_10, GRAPH_3_12A,
+    GRAPH_3_12B
+)
 
 
 class LinearSearchTest(unittest.TestCase):
@@ -34,5 +38,17 @@ class FindSubstringTest(unittest.TestCase, FindSubstringTestBase):
         self.algorithm = find_substring
 
 
-if __name__ == '__main__':
-    unittest.main()
+class DepthFirstSearchTest(unittest.TestCase):
+    def test_graph_3_10(self):
+        vertices = list(depth_first_search(GRAPH_3_10))
+        self.assertEqual(
+            vertices, ['a', 'c', 'd', 'f', 'b', 'e', 'g', 'h', 'i', 'j']
+        )
+
+    def test_graph_3_12a(self):
+        vertices = list(depth_first_search(GRAPH_3_12A))
+        self.assertEqual(vertices, ['a', 'b', 'c', 'd', 'h', 'g', 'f', 'e'])
+
+    def test_graph_3_12b(self):
+        vertices = list(depth_first_search(GRAPH_3_12B))
+        self.assertEqual(vertices, ['a', 'b', 'c', 'd', 'g', 'f', 'e'])
