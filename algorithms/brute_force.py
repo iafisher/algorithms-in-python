@@ -10,6 +10,9 @@ Author:  Ian Fisher (iafisher@protonmail.com)
 Version: September 2018
 """
 
+from .utils import enumerate_slice
+
+
 def linear_search(lst: list, x) -> int:
     """Return the index of the first element of `lst` equal to `x`, or -1 if no
     elements of `lst` are equal to `x`.
@@ -168,3 +171,27 @@ def breadth_first_search_helper(graph, source, visited):
                 yield neighbor
                 visited[neighbor] = True
                 queue.append(neighbor)
+
+
+def closest_pair(points: list) -> tuple:
+    """Given a list of two-dimensional points, return the two closest distinct
+    points. If the list is empty or has only one point, None is returned. If
+    there is more than one closest pair, the one whose first point appears first
+    in the list is returned. The first point in the returned pair always appears
+    before the second point in the list.
+
+    Design idea: Calculate the distance between every pair of points.
+
+    Complexity: O(n^2) time, O(1) space.
+    """
+    closest_distance = None
+    closest_pair = None
+    for i, p1 in enumerate(points):
+        for j, p2 in enumerate_slice(points, i+1):
+            # Note that for comparison purposes we do not need to compute the
+            # square root to get the actual distance.
+            distance = (p1[0] - p2[0])**2 + (p1[1] - p2[1])**2
+            if closest_distance is None or distance < closest_distance:
+                closest_distance = distance
+                closest_pair = (p1, p2)
+    return closest_pair

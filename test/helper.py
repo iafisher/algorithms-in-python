@@ -147,6 +147,47 @@ class FindSubstringTestBase:
         self.assertEqual(self.algorithm('cockpit', 'pita'), -1)
 
 
+class ClosestPairTestBase:
+    """A base class for testing closest-pair algorithms. See closest_pair in
+    brute_force.py for a description of the problem.
+    """
+
+    def test_two_points(self):
+        points = [(0, 0), (4, 4)]
+        self.assertEqual(self.algorithm(points), ((0, 0), (4, 4)))
+
+    def test_three_points(self):
+        points = [(2, 2), (-1, -1), (2, 4)]
+        self.assertEqual(self.algorithm(points), ((2, 2), (2, 4)))
+
+    def test_four_points(self):
+        points = [(2, 2), (-1, -1), (2, 4), (0, 0)]
+        self.assertEqual(self.algorithm(points), ((-1, -1), (0, 0)))
+
+    def test_many_points(self):
+        points = [
+            (-77, 39), (-78, -31), (52, -77), (49, 91), (96, -60), (75, -8),
+            (-35, 74), (62, -99), (89, 7), (50, -89), (26, 13), (71, -14),
+            (-60, -55), (-88, 23), (-17, 81), (-50, -38), (-31, 21), (-94, -20),
+            (-16, 85), (66, -75)
+        ]
+        self.assertEqual(self.algorithm(points), ((-17, 81), (-16, 85)))
+
+    def test_real_valued_points(self):
+        points = [(0, 0), (1.5, 0), (0, -1.5), (-1.5, 0), (0, 1.5), (0.1, 1.3)]
+        self.assertEqual(self.algorithm(points), ((0, 1.5), (0.1, 1.3)))
+
+    def test_one_point(self):
+        self.assertEqual(self.algorithm([(0, 0)]), None)
+
+    def test_zero_points(self):
+        self.assertEqual(self.algorithm([]), None)
+
+    def test_multiple_closest_pairs(self):
+        points = [(0, 0), (0, 1), (700, 700), (700, 701)]
+        self.assertEqual(self.algorithm(points), ((0, 0), (0, 1)))
+
+
 # Figure 3.10 on page 123
 GRAPH_3_10 = {
     'a': ['c', 'd', 'e'],

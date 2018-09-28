@@ -1,12 +1,12 @@
 import unittest
 
 from algorithms.brute_force import (
-    breadth_first_search, bubble_sort, depth_first_search, find_substring,
-    linear_search, selection_sort
+    breadth_first_search, bubble_sort, closest_pair, depth_first_search,
+    find_substring, linear_search, selection_sort
 )
 from .helper import (
-    FindSubstringTestBase, StableSortTestBase, GRAPH_3_10, GRAPH_3_12A,
-    GRAPH_3_12B
+    ClosestPairTestBase, FindSubstringTestBase, StableSortTestBase, GRAPH_3_10,
+    GRAPH_3_12A, GRAPH_3_12B
 )
 
 
@@ -68,3 +68,8 @@ class BreadthFirstSearchTest(unittest.TestCase):
     def test_graph_3_12b(self):
         vertices = list(breadth_first_search(GRAPH_3_12B))
         self.assertEqual(vertices, ['a', 'b', 'e', 'c', 'f', 'd', 'g'])
+
+
+class ClosestPairTest(unittest.TestCase, ClosestPairTestBase):
+    def setUp(self):
+        self.algorithm = closest_pair
