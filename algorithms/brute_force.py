@@ -31,7 +31,8 @@ def linear_search(lst: list, x) -> int:
 
 
 def bubble_sort(lst: list) -> list:
-    """Sort a list in ascending order.
+    """Sort a list in ascending order. The original list is mutated and
+    returned. The sort is stable.
 
     Design idea: Swap adjacent out-of-order elements until the list is sorted.
 
@@ -59,7 +60,8 @@ def bubble_sort(lst: list) -> list:
 
 
 def selection_sort(lst: list) -> list:
-    """Sort a list in ascending order.
+    """Sort a list in ascending order. The original list is mutated and
+    returned. The sort is stable.
 
     Design idea: Find the smallest element in the list and swap it to the front.
     Find the second smallest element and swap it to the second position.

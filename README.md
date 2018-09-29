@@ -25,6 +25,7 @@ Searching
 Sorting
 - Bubble sort
 - Insertion sort
+- Merge sort
 - Selection sort
 
 ## Algorithms to do
@@ -46,7 +47,6 @@ Decrease-and-conquer
 - Game of Nim
 
 Divide-and-conquer
-- Merge sort
 - Quicksort
 - Height of a binary tree
 - Binary tree traversals (preorder, postorder, inorder)

@@ -38,7 +38,8 @@ def binary_search(lst: list, x) -> int:
 
 
 def insertion_sort(lst: list) -> list:
-    """Sort a list in ascending order.
+    """Sort a list in ascending order. The original list is mutated and
+    returned. The sort is stable.
 
     Design idea: Iterate over the list. After i iterations, the first i elements
     of the list should be sorted. Insert the i+1'th element in the appropriate
