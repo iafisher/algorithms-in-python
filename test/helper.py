@@ -249,6 +249,55 @@ class ConvexHullTestBase:
         self.assertEqual(self.algorithm(points), {(0, 0), (5, 5)})
 
 
+class TravelingSalesmanTestBase:
+    """A base class for testing traveling salesman algorithms. See
+    traveling_salesman in brute_force.py for a description of the problem.
+    """
+
+    def test_graph_3_7(self):
+        self.assertEqual(self.algorithm(GRAPH_3_7), ('a', 'b', 'd', 'c'))
+
+    def test_graph_with_two_circuits(self):
+        # The edges with weight 3 form a circuit around the graph, which can be
+        # drawn as a circle. The two edges with weight 7 cut across the circle
+        # and form another circuit, but a less optimal one.
+        graph = {
+            'a': [('b', 3), ('e', 7), ('g', 3)],
+            'b': [('a', 3), ('c', 3), ('f', 7)],
+            'c': [('b', 3), ('d', 3)],
+            'd': [('c', 3), ('e', 3)],
+            'e': [('a', 7), ('d', 3), ('f', 3)],
+            'f': [('b', 7), ('e', 3), ('g', 3)],
+            'g': [('a', 3), ('f', 3)]
+        }
+        self.assertEqual(
+            self.algorithm(graph), ('a', 'b', 'c', 'd', 'e', 'f', 'g')
+        )
+
+    def test_graph_with_no_circuits(self):
+        graph = {
+            'a': [('b', 1)],
+            'b': [('c', 1)],
+            'c': [],
+        }
+        self.assertEqual(self.algorithm(graph), None)
+
+    def test_graph_9_3(self):
+        self.assertIn(
+            self.algorithm(GRAPH_9_3),
+            {('a', 'b', 'c', 'd', 'f', 'e'), ('a', 'e', 'f', 'd', 'c', 'b')}
+        )
+
+
+# Figure 3.7 on page 117
+GRAPH_3_7 = {
+    'a': [('b', 2), ('c', 5), ('d', 7)],
+    'b': [('a', 2), ('c', 8), ('d', 3)],
+    'c': [('a', 5), ('b', 8), ('d', 1)],
+    'd': [('a', 7), ('b', 3), ('c', 1)],
+}
+
+
 # Figure 3.10 on page 123
 GRAPH_3_10 = {
     'a': ['c', 'd', 'e'],
@@ -286,4 +335,15 @@ GRAPH_3_12B = {
     'e': ['a'],
     'f': ['b'],
     'g': ['c'],
+}
+
+
+# Figure 9.3 on page 321
+GRAPH_9_3 = {
+    'a': [('b', 3), ('f', 5), ('e', 6)],
+    'b': [('a', 3), ('c', 1), ('f', 4)],
+    'c': [('b', 1), ('d', 6), ('f', 4)],
+    'd': [('c', 6), ('e', 8), ('f', 5)],
+    'e': [('a', 6), ('d', 8), ('f', 2)],
+    'f': [('a', 5), ('b', 4), ('c', 4), ('d', 5), ('e', 8)],
 }

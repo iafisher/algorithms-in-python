@@ -15,6 +15,7 @@ Geometry
 Graph
 - Breadth-first search
 - Depth-first search
+- Traveling salesman (brute force)
 
 Searching
 - Binary search
@@ -28,7 +29,6 @@ Sorting
 
 ## Algorithms to do
 Brute force and exhaustive search
-- Traveling salesman
 - Knapsack problem
 - Assignment problem
 

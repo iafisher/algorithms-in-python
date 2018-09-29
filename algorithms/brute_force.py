@@ -66,7 +66,7 @@ def selection_sort(lst: list) -> list:
     Continue until you reach the end, at which point the list will be sorted.
 
     Complexity: O(n^2) time, O(1) space. Stable and in-place.
-    
+
     See quicksort, merge sort and heapsort for sorting algorithms with a better
     time complexity.
     """
@@ -262,3 +262,66 @@ def find_endpoints(points: list) -> set:
             min_x_point = p
             min_x = p[0]
     return {max_x_point, min_x_point}
+
+
+def traveling_salesman(graph) -> tuple:
+    """Given a graph with weighted edges, return the Hamiltonian circuit with
+    the lowest sum of edge weights, or None if no Hamiltonian circuits exist.
+    A Hamiltonian circuit is a path that visits each vertex of the graph exactly
+    once before returning to the starting vertex.
+
+    Design idea: Enumerate all permutations of the graph's vertices, check if
+    each permutation represents a Hamiltonian circuit, and keep track of the
+    most optimal one seen so far.
+
+    Complexity: O((|V| + |E|) * |V|!) time, O(|V|^2) space (on account of
+    `permutations()`).
+    """
+    best_path = None
+    best_path_cost = None
+    for path in permutations(list(graph.keys())):
+        cost = hamiltonian_circuit_cost(graph, path)
+        if cost is not None:
+            if best_path is None or cost < best_path_cost:
+                best_path = path
+                best_path_cost = cost
+    return best_path
+
+
+def permutations(items: list):
+    """Enumerate the permutations of `items` in lexicographic order.
+
+    Complexity: O(n!) time, O(n^2) space.
+
+    TODO: Better space complexity, and accept arbitrary iterators.
+    """
+    if len(items) == 1:
+        yield (items[0],)
+    else:
+        for i, x in enumerate(items):
+            for p in permutations(items[:i] + items[i+1:]):
+                yield (x,) + p
+
+
+def hamiltonian_circuit_cost(graph, path: list) -> int:
+    """If `path` represents a Hamiltonian circuit in `graph`, return the path's
+    total cost (the sum of all the edge weights). If `path` is not a Hamiltonian
+    circuit, return None.
+
+    Complexity: O(|V| + |E|) time, O(|V|) space.
+    """
+    if not path:
+        return 0 if not graph else None
+
+    if len(set(path)) != len(path):
+        return None
+
+    cost = 0
+    for i in range(len(path)):
+        for vertex, weight in graph[path[i-1]]:
+            if vertex == path[i]:
+                cost += weight
+                break
+        else:
+            return None
+    return cost

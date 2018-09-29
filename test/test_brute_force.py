@@ -2,11 +2,13 @@ import unittest
 
 from algorithms.brute_force import (
     breadth_first_search, bubble_sort, closest_pair, convex_hull,
-    depth_first_search, find_substring, linear_search, selection_sort
+    depth_first_search, find_substring, linear_search, permutations,
+    selection_sort, traveling_salesman,
 )
 from .helper import (
     ClosestPairTestBase, ConvexHullTestBase, FindSubstringTestBase,
-    StableSortTestBase, GRAPH_3_10, GRAPH_3_12A, GRAPH_3_12B
+    StableSortTestBase, TravelingSalesmanTestBase, GRAPH_3_10, GRAPH_3_12A,
+    GRAPH_3_12B,
 )
 
 
@@ -78,3 +80,46 @@ class ClosestPairTest(unittest.TestCase, ClosestPairTestBase):
 class ConvexHullTest(unittest.TestCase, ConvexHullTestBase):
     def setUp(self):
         self.algorithm = convex_hull
+
+
+class TravelingSalesmanTest(unittest.TestCase, TravelingSalesmanTestBase):
+    def setUp(self):
+        self.algorithm = traveling_salesman
+
+
+class PermutationsTest(unittest.TestCase):
+    def test_two_items(self):
+        items = ['a', 'b']
+        self.assertEqual(list(permutations(items)), [('a', 'b'), ('b', 'a')])
+
+    def test_three_items(self):
+        items = ['a', 'b', 'c']
+        self.assertEqual(
+            list(permutations(items)),
+            [
+                ('a', 'b', 'c'), ('a', 'c', 'b'), ('b', 'a', 'c'),
+                ('b', 'c', 'a'), ('c', 'a', 'b'), ('c', 'b', 'a')
+            ]
+        )
+
+    def test_four_items(self):
+        items = ['a', 'b', 'c', 'd']
+        self.assertEqual(
+            list(permutations(items)),
+            [
+               ('a', 'b', 'c', 'd'), ('a', 'b', 'd', 'c'), ('a', 'c', 'b', 'd'),
+               ('a', 'c', 'd', 'b'), ('a', 'd', 'b', 'c'), ('a', 'd', 'c', 'b'),
+               ('b', 'a', 'c', 'd'), ('b', 'a', 'd', 'c'), ('b', 'c', 'a', 'd'),
+               ('b', 'c', 'd', 'a'), ('b', 'd', 'a', 'c'), ('b', 'd', 'c', 'a'),
+               ('c', 'a', 'b', 'd'), ('c', 'a', 'd', 'b'), ('c', 'b', 'a', 'd'),
+               ('c', 'b', 'd', 'a'), ('c', 'd', 'a', 'b'), ('c', 'd', 'b', 'a'),
+               ('d', 'a', 'b', 'c'), ('d', 'a', 'c', 'b'), ('d', 'b', 'a', 'c'),
+               ('d', 'b', 'c', 'a'), ('d', 'c', 'a', 'b'), ('d', 'c', 'b', 'a')
+            ]
+        )
+
+    def test_zero_items(self):
+        self.assertEqual(list(permutations([])), [])
+
+    def test_one_item(self):
+        self.assertEqual(list(permutations(['a'])), [('a',)])
