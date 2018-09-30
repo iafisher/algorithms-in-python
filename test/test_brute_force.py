@@ -7,8 +7,8 @@ from algorithms.brute_force import (
 )
 from .helper import (
     ClosestPairTestBase, ConvexHullTestBase, FindSubstringTestBase,
-    StableSortTestBase, TravelingSalesmanTestBase, GRAPH_3_10, GRAPH_3_12A,
-    GRAPH_3_12B,
+    StableSortTestBase, SortTestBase, TravelingSalesmanTestBase, GRAPH_3_10,
+    GRAPH_3_12A, GRAPH_3_12B,
 )
 
 
@@ -25,7 +25,7 @@ class LinearSearchTest(unittest.TestCase):
         self.assertEqual(linear_search(lst, 'not me'), -1)
 
 
-class SelectionSortTest(unittest.TestCase, StableSortTestBase):
+class SelectionSortTest(unittest.TestCase, SortTestBase):
     def setUp(self):
         self.algorithm = selection_sort
 

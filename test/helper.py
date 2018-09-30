@@ -95,6 +95,17 @@ class StableSortTestBase(SortTestBase):
         self.assertIs(sorted_lst[1], b0)
         self.assertIs(sorted_lst[2], b1)
 
+    def test_sort_stability_a_third_time(self):
+        a = DummyObject('a')
+        b0 = DummyObject('b')
+        b1 = DummyObject('b')
+        lst = [b0, b1, a]
+        sorted_lst = self.algorithm(lst)
+        self.assertEqual(sorted_lst, [a, b0, b1])
+        # Make sure b0 and b1 are in their original order.
+        self.assertIs(sorted_lst[1], b0)
+        self.assertIs(sorted_lst[2], b1)
+
 
 @functools.total_ordering
 class DummyObject:

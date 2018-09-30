@@ -61,13 +61,13 @@ def bubble_sort(lst: list) -> list:
 
 def selection_sort(lst: list) -> list:
     """Sort a list in ascending order. The original list is mutated and
-    returned. The sort is stable.
+    returned. The sort is not stable.
 
     Design idea: Find the smallest element in the list and swap it to the front.
     Find the second smallest element and swap it to the second position.
     Continue until you reach the end, at which point the list will be sorted.
 
-    Complexity: O(n^2) time, O(1) space. Stable and in-place.
+    Complexity: O(n^2) time, O(1) space.
 
     See quicksort, merge sort and heapsort for sorting algorithms with a better
     time complexity.
@@ -77,8 +77,6 @@ def selection_sort(lst: list) -> list:
         minimum_index = i
         # Find the minimum element in the rest of the list.
         for j in range(i+1, len(lst)):
-            # As in bubble sort, this must be < and not <= for the sort to be
-            # stable.
             if lst[j] < minimum:
                 minimum = lst[j]
                 minimum_index = j
