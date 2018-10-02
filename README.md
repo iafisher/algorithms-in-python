@@ -10,7 +10,7 @@ $ nose2
 ## Algorithms implemented
 Geometry
 - Closest pair (brute force)
-- Convex hull (by brute force)
+- Convex hull (brute force)
 
 Graph
 - Breadth-first search
@@ -28,9 +28,11 @@ Sorting
 - Merge sort
 - Selection sort
 
+Miscellaneous problems
+- Knapsack problem (brute force)
+
 ## Algorithms to do
 Brute force and exhaustive search
-- Knapsack problem
 - Assignment problem
 
 Decrease-and-conquer

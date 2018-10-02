@@ -2,13 +2,13 @@ import unittest
 
 from algorithms.brute_force import (
     breadth_first_search, bubble_sort, closest_pair, convex_hull,
-    depth_first_search, find_substring, linear_search, permutations,
+    depth_first_search, find_substring, knapsack, linear_search, permutations,
     selection_sort, traveling_salesman,
 )
 from .helper import (
     ClosestPairTestBase, ConvexHullTestBase, FindSubstringTestBase,
-    StableSortTestBase, SortTestBase, TravelingSalesmanTestBase, GRAPH_3_10,
-    GRAPH_3_12A, GRAPH_3_12B,
+    KnapsackTestBase, StableSortTestBase, SortTestBase,
+    TravelingSalesmanTestBase, GRAPH_3_10, GRAPH_3_12A, GRAPH_3_12B,
 )
 
 
@@ -123,3 +123,8 @@ class PermutationsTest(unittest.TestCase):
 
     def test_one_item(self):
         self.assertEqual(list(permutations(['a'])), [('a',)])
+
+
+class KnapsackTest(unittest.TestCase, KnapsackTestBase):
+    def setUp(self):
+        self.algorithm = knapsack

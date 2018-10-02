@@ -10,6 +10,7 @@ Author:  Ian Fisher (iafisher@protonmail.com)
 Version: September 2018
 """
 
+from .decrease_and_conquer import subsets
 from .utils import iterate_slice
 
 
@@ -325,3 +326,26 @@ def hamiltonian_circuit_cost(graph, path: list) -> int:
         else:
             return None
     return cost
+
+
+def knapsack(items: set, max_weight: int) -> set:
+    """Given a set of (value, weight) pairs and a maximum weight, return the
+    most valuable subset of items whose total weight does not exceed the
+    maximum weight.
+
+    Design idea: Enumerate all subsets of the items and pick the one with the
+    highest value that doesn't exceed the maximum weight.
+
+    Complexity: O(2^n) time, O(n) space.
+    """
+    max_value = 0
+    max_value_set = set()
+    for ss in subsets(items):
+        weight = sum(item[1] for item in ss)
+        value = sum(item[0] for item in ss)
+        if weight > max_weight:
+            continue
+        if value > max_value:
+            max_value = value
+            max_value_set = ss
+    return max_value_set

@@ -59,3 +59,17 @@ def insertion_sort(lst: list) -> list:
             j -= 1
         lst[j+1] = v
     return lst
+
+
+def subsets(s: set):
+    """Enumerate all subsets of the given set. A set is considered a subset of
+    itself.
+    """
+    if not s:
+        yield frozenset()
+    else:
+        s2 = s.copy()
+        x = s2.pop()
+        for ss in subsets(s2):
+            yield ss
+            yield frozenset(ss) | {x}

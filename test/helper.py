@@ -10,6 +10,7 @@ class BogoSortTest(unittest.TestCase, SortTestBase):
 """
 import functools
 import unittest
+from collections import namedtuple
 
 
 class SortTestBase:
@@ -297,6 +298,68 @@ class TravelingSalesmanTestBase:
         self.assertIn(
             self.algorithm(GRAPH_9_3),
             {('a', 'b', 'c', 'd', 'f', 'e'), ('a', 'e', 'f', 'd', 'c', 'b')}
+        )
+
+
+Item = namedtuple('Item', ['v', 'w'])
+
+
+class KnapsackTestBase:
+    def test_can_fit_all_items(self):
+        items = {Item(v=50, w=1), Item(v=40, w=1), Item(v=30, w=1)}
+        self.assertEqual(self.algorithm(items, 3), items)
+
+    def test_can_only_fit_one_item(self):
+        items = {
+            Item(v=1000, w=50), Item(v=2000, w=100), Item(v=100, w=5),
+            Item(v=50, w=2)
+        }
+        self.assertEqual(self.algorithm(items, 6), {Item(v=100, w=5)})
+
+    def test_all_items_too_heavy(self):
+        self.assertEqual(
+            self.algorithm({Item(v=100, w=50), Item(v=200, w=40)}, 30), set()
+        )
+
+    def test_figure_3_8(self):
+        # Figure 3.8 on page 118
+        items = {
+            Item(v=42, w=7), Item(v=12, w=3), Item(v=40, w=4), Item(v=25, w=5)
+        }
+        self.assertEqual(
+            self.algorithm(items, 10), {Item(v=40, w=4), Item(v=25, w=5)}
+        )
+
+    def test_eight_items(self):
+        items = {
+            Item(v=88, w=93), Item(v=13, w=34), Item(v=33, w=17),
+            Item(v=79, w=11), Item(v=56, w=65), Item(v=77, w=9),
+            Item(v=45, w=95), Item(v=37, w=66)
+        }
+        # TODO: Verify this answer.
+        self.assertEqual(
+            self.algorithm(items, 250),
+            {
+                Item(v=79, w=11), Item(v=13, w=34), Item(v=88, w=93),
+                Item(v=56, w=65), Item(v=77, w=9), Item(v=33, w=17)
+            }
+        )
+
+    def test_eleven_items(self):
+        items = {
+            Item(v=59, w=58), Item(v=85, w=96), Item(v=47, w=3),
+            Item(v=55, w=8), Item(v=88, w=58), Item(v=92, w=35),
+            Item(v=25, w=91), Item(v=19, w=3), Item(v=40, w=60),
+            Item(v=48, w=14), Item(v=74, w=29)
+        }
+        # TODO: Verify this answer.
+        self.assertEqual(
+            self.algorithm(items, 300),
+            {
+                Item(v=59, w=58), Item(v=47, w=3), Item(v=55, w=8),
+                Item(v=88, w=58), Item(v=92, w=35), Item(v=19, w=3),
+                Item(v=40, w=60), Item(v=48, w=14), Item(v=74, w=29)
+            }
         )
 
 
