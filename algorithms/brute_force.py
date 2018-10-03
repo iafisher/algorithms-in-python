@@ -10,11 +10,13 @@ Author:  Ian Fisher (iafisher@protonmail.com)
 Version: September 2018
 """
 
+from typing import Any, Dict, FrozenSet, Iterator, List, Optional, Set, Tuple
+
 from .decrease_and_conquer import subsets
-from .utils import iterate_slice
+from .utils import AdjacencyList, Point, WeightedAdjacencyList, iterate_slice
 
 
-def linear_search(lst: list, x) -> int:
+def linear_search(lst: list, x: Any) -> int:
     """Return the index of the first element of `lst` equal to `x`, or -1 if no
     elements of `lst` are equal to `x`.
 
@@ -108,7 +110,7 @@ def find_substring(text: str, pattern: str) -> int:
     return -1
 
 
-def depth_first_search(graph):
+def depth_first_search(graph: AdjacencyList) -> Iterator[str]:
     """Yield every vertex in the graph (represented as an adjacency list) in
     depth-first order, i.e. starting at an arbitrary root and exploring as far
     as possible down each branch before backtracking.
@@ -128,7 +130,9 @@ def depth_first_search(graph):
             yield from depth_first_search_helper(graph, source, visited)
 
 
-def depth_first_search_helper(graph, source, visited):
+def depth_first_search_helper(
+        graph: AdjacencyList, source: str, visited: Dict[str, bool]
+    ) -> Iterator[str]:
     """Yield every vertex in the graph in depth-first order connected to the
     given vertex. `visited` should be a dictionary from vertices to booleans
     that indicate whether a vertex has been visited before.
@@ -140,7 +144,7 @@ def depth_first_search_helper(graph, source, visited):
             yield from depth_first_search_helper(graph, neighbor, visited)
 
 
-def breadth_first_search(graph):
+def breadth_first_search(graph: AdjacencyList) -> Iterator[str]:
     """Yield every vertex in the graph (represented as an adjacency list) in
     breadth-first order, i.e. starting at an arbitrary root and visiting each of
     its neighbors before visiting the neighbors of the root's first neighbors,
@@ -157,7 +161,9 @@ def breadth_first_search(graph):
             yield from breadth_first_search_helper(graph, source, visited)
 
 
-def breadth_first_search_helper(graph, source, visited):
+def breadth_first_search_helper(
+        graph: AdjacencyList, source: str, visited: Dict[str, bool]
+    ) -> Iterator[str]:
     """Yield every vertex in the graph in breadth-first order connected to the
     given vertex. `visited` should be a dictionary from vertices to booleans
     that indicate whether a vertex has been visited before.
@@ -174,7 +180,7 @@ def breadth_first_search_helper(graph, source, visited):
                 queue.append(neighbor)
 
 
-def closest_pair(points: list) -> tuple:
+def closest_pair(points: List[Point]) -> Optional[Tuple[Point , Point]]:
     """Given a list of two-dimensional points, return the two closest distinct
     points. If the list is empty or has only one point, None is returned. If
     there is more than one closest pair, the one whose first point appears first
@@ -198,7 +204,7 @@ def closest_pair(points: list) -> tuple:
     return closest_pair
 
 
-def convex_hull(points: list) -> set:
+def convex_hull(points: List[Point]) -> Set[Point]:
     """Return the set of points comprising the convex hull of the given points.
     The convex hull is the smallest convex (i.e., the perimeter has no
     indentations) set that encloses all the points.
@@ -247,7 +253,7 @@ def convex_hull(points: list) -> set:
     return convex_hull
 
 
-def find_endpoints(points: list) -> set:
+def find_endpoints(points: List[Point]) -> Set[Point]:
     """Given a non-empty list of two-dimensional points on the same line, return
     the endpoints of the line.
     """
@@ -265,7 +271,7 @@ def find_endpoints(points: list) -> set:
     return {max_x_point, min_x_point}
 
 
-def traveling_salesman(graph) -> tuple:
+def traveling_salesman(graph: WeightedAdjacencyList) -> Optional[Tuple[str]]:
     """Given a graph with weighted edges, return the Hamiltonian circuit with
     the lowest sum of edge weights, or None if no Hamiltonian circuits exist.
     A Hamiltonian circuit is a path that visits each vertex of the graph exactly
@@ -281,15 +287,15 @@ def traveling_salesman(graph) -> tuple:
     best_path = None
     best_path_cost = None
     for path in permutations(list(graph.keys())):
-        cost = hamiltonian_circuit_cost(graph, path)
+        cost = hamiltonian_circuit_cost(graph, path)  # type: ignore
         if cost is not None:
             if best_path is None or cost < best_path_cost:
                 best_path = path
                 best_path_cost = cost
-    return best_path
+    return best_path  # type: ignore
 
 
-def permutations(items: list):
+def permutations(items: list) -> Iterator[tuple]:
     """Enumerate the permutations of `items` in lexicographic order.
 
     Complexity: O(n!) time, O(n^2) space.
@@ -304,7 +310,9 @@ def permutations(items: list):
                 yield (x,) + p
 
 
-def hamiltonian_circuit_cost(graph, path: list) -> int:
+def hamiltonian_circuit_cost(
+        graph: WeightedAdjacencyList, path: List[str]
+    ) -> Optional[float]:
     """If `path` represents a Hamiltonian circuit in `graph`, return the path's
     total cost (the sum of all the edge weights). If `path` is not a Hamiltonian
     circuit, return None.
@@ -317,7 +325,7 @@ def hamiltonian_circuit_cost(graph, path: list) -> int:
     if len(set(path)) != len(path):
         return None
 
-    cost = 0
+    cost = 0.0
     for i in range(len(path)):
         for vertex, weight in graph[path[i-1]]:
             if vertex == path[i]:
@@ -328,7 +336,9 @@ def hamiltonian_circuit_cost(graph, path: list) -> int:
     return cost
 
 
-def knapsack(items: set, max_weight: int) -> set:
+def knapsack(
+        items: Set[Tuple[float, float]], max_weight: float
+    ) -> FrozenSet[Tuple[float, float]]:
     """Given a set of (value, weight) pairs and a maximum weight, return the
     most valuable subset of items whose total weight does not exceed the
     maximum weight.
@@ -339,7 +349,7 @@ def knapsack(items: set, max_weight: int) -> set:
     Complexity: O(2^n) time, O(n) space.
     """
     max_value = 0
-    max_value_set = set()
+    max_value_set: FrozenSet[Tuple[float, float]] = frozenset()
     for ss in subsets(items):
         weight = sum(item[1] for item in ss)
         value = sum(item[0] for item in ss)

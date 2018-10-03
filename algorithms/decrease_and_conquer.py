@@ -8,6 +8,8 @@ Author:  Ian Fisher (iafisher@protonmail.com)
 Version: September 2018
 """
 
+from typing import Iterator
+
 
 def binary_search(lst: list, x) -> int:
     """Return the index of the first element of the sorted list `lst` equal to
@@ -61,7 +63,7 @@ def insertion_sort(lst: list) -> list:
     return lst
 
 
-def subsets(s: set):
+def subsets(s: set) -> Iterator[frozenset]:
     """Enumerate all subsets of the given set. A set is considered a subset of
     itself.
     """
