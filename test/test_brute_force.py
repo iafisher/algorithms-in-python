@@ -42,32 +42,38 @@ class FindSubstringTest(unittest.TestCase, FindSubstringTestBase):
 
 class DepthFirstSearchTest(unittest.TestCase):
     def test_graph_3_10(self):
+        # Note that this is not the only valid DFS traversal of this graph.
         vertices = list(depth_first_search(GRAPH_3_10))
         self.assertEqual(
             vertices, ['a', 'c', 'd', 'f', 'b', 'e', 'g', 'h', 'i', 'j']
         )
 
     def test_graph_3_12a(self):
+        # Note that this is not the only valid DFS traversal of this graph.
         vertices = list(depth_first_search(GRAPH_3_12A))
         self.assertEqual(vertices, ['a', 'b', 'c', 'd', 'h', 'g', 'f', 'e'])
 
     def test_graph_3_12b(self):
+        # Note that this is not the only valid DFS traversal of this graph.
         vertices = list(depth_first_search(GRAPH_3_12B))
         self.assertEqual(vertices, ['a', 'b', 'c', 'd', 'g', 'f', 'e'])
 
 
 class BreadthFirstSearchTest(unittest.TestCase):
     def test_graph_3_10(self):
+        # Note that this is not the only valid BFS traversal of this graph.
         vertices = list(breadth_first_search(GRAPH_3_10))
         self.assertEqual(
             vertices, ['a', 'c', 'd', 'e', 'f', 'b', 'g', 'h', 'j', 'i']
         )
 
     def test_graph_3_12a(self):
+        # Note that this is not the only valid BFS traversal of this graph.
         vertices = list(breadth_first_search(GRAPH_3_12A))
         self.assertEqual(vertices, ['a', 'b', 'e', 'c', 'f', 'd', 'g', 'h'])
 
     def test_graph_3_12b(self):
+        # Note that this is not the only valid BFS traversal of this graph.
         vertices = list(breadth_first_search(GRAPH_3_12B))
         self.assertEqual(vertices, ['a', 'b', 'e', 'c', 'f', 'd', 'g'])
 
