@@ -131,23 +131,23 @@ def depth_first_search(graph: AdjacencyList) -> Iterator[str]:
 
     Complexity: O(|V| + |E|) time, O(|V|) space.
     """
-    visited = {v: False for v in graph}
+    visited = set()
     for source in graph:
-        if not visited[source]:
+        if source not in visited:
             yield from depth_first_search_helper(graph, source, visited)
 
 
 def depth_first_search_helper(
-        graph: AdjacencyList, source: str, visited: Dict[str, bool]
+        graph: AdjacencyList, source: str, visited: Set[str]
     ) -> Iterator[str]:
     """Yield every vertex in the graph in depth-first order connected to the
-    given vertex. `visited` should be a dictionary from vertices to booleans
-    that indicate whether a vertex has been visited before.
+    given vertex. `visited` should be a set of vertices that have already been
+    visited.
     """
     yield source
-    visited[source] = True
+    visited.add(source)
     for neighbor in graph[source]:
-        if not visited[neighbor]:
+        if neighbor not in visited:
             yield from depth_first_search_helper(graph, neighbor, visited)
 
 
@@ -162,28 +162,28 @@ def breadth_first_search(graph: AdjacencyList) -> Iterator[str]:
 
     Complexity: O(|V| + |E|) time, O(|V|) space.
     """
-    visited = {v: False for v in graph}
+    visited = set()
     for source in graph:
-        if not visited[source]:
+        if source not in visited:
             yield from breadth_first_search_helper(graph, source, visited)
 
 
 def breadth_first_search_helper(
-        graph: AdjacencyList, source: str, visited: Dict[str, bool]
+        graph: AdjacencyList, source: str, visited: Set[str]
     ) -> Iterator[str]:
     """Yield every vertex in the graph in breadth-first order connected to the
-    given vertex. `visited` should be a dictionary from vertices to booleans
-    that indicate whether a vertex has been visited before.
+    given vertex. `visited` should be a set of vertices that have already been
+    visited.
     """
     yield source
-    visited[source] = True
+    visited.add(source)
     queue = [source]
     while queue:
         vertex = queue.pop(0)
         for neighbor in graph[vertex]:
-            if not visited[neighbor]:
+            if neighbor not in visited:
                 yield neighbor
-                visited[neighbor] = True
+                visited.add(neighbor)
                 queue.append(neighbor)
 
 
