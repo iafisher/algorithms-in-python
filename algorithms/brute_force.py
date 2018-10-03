@@ -1,13 +1,20 @@
-"""Brute-force and exhaustive search algorithms solve a problem by generating
-all possible solutions until the correct one is found. Brute-force algorithms
-are often simple to design and implement, but computationally expensive.
+"""Brute-force algorithms solve a problem by generating all possible solutions
+until the correct one is found. They are often simple to design and implement,
+but computationally expensive.
 
 Backtracking, branch-and-bound and approximation can be used to improve the
 performance of brute-force algorithms for problems with no known better
 algorithms.
 
+Exhaustive search algorithms iterate over every element of a collection to find
+an element with some particular property. Examples are linear search, and depth-
+first and breadth-first traversals of graphs. Such algorithms can sometimes be
+improved to exploit particular properties of the collection. For example, sorted
+lists can be searched in O(log n) time with binary search instead of O(n) time
+with linear search.
+
 Author:  Ian Fisher (iafisher@protonmail.com)
-Version: September 2018
+Version: October 2018
 """
 
 from typing import Any, Dict, FrozenSet, Iterator, List, Optional, Set, Tuple

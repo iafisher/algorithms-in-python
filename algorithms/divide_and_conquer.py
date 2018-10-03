@@ -1,3 +1,10 @@
+"""Divide-and-conquer algorithms divide a problem into two or more smaller
+instances of the same problem.
+
+Author:  Ian Fisher (iafisher@protonmail.com)
+Version: October 2018
+"""
+
 def merge_sort(lst: list) -> list:
     """Sort a list in ascending order. The original list is mutated and
     returned. The sort is stable.
