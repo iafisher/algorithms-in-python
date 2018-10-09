@@ -187,6 +187,46 @@ def breadth_first_search_helper(
                 queue.append(neighbor)
 
 
+def detect_cycle(graph: AdjacencyList) -> bool:
+    """Return True if the graph contains a cycle.
+
+    Design idea: Traverse the graph depth-first (breadth-first also works). If
+    you ever reach a neighbor that has already been visited, you have found a
+    cycle.
+
+    Complexity: O(|V| + |E|) time, O(|V|) space.
+    """
+    # TODO: Actually the algorithm has to be different for directed and undirected
+    # graphs, I think.
+    visited = set()
+    for source in graph:
+        if source not in visited:
+            if detect_cycle_helper(graph, source, visited):
+                return True
+    return False
+
+
+def detect_cycle_helper(
+        graph: AdjacencyList, source: str, visited: Set[str]
+    ) -> bool:
+    """Return True if the component of the graph connected to the given vertex
+    contains a cycle. `visited` should be a set of vertices that have already
+    been visited.
+    """
+    visited.add(source)
+    stack = [source]
+    while stack:
+        vertex = stack.pop()
+        for neighbor in graph[source]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                stack.append(visited)
+            else:
+                if neighbor in stack:
+                    return True
+    return False
+
+
 def closest_pair(points: List[Point]) -> Optional[Tuple[Point , Point]]:
     """Given a list of two-dimensional points, return the two closest distinct
     points. If the list is empty or has only one point, None is returned. If

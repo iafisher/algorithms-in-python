@@ -6,11 +6,12 @@ setUp method that sets `self.algorithm` to the desired algorithm, e.g.
 class BogoSortTest(unittest.TestCase, SortTestBase):
     def setUp(self):
         self.algorithm = bogosort
-
 """
 import functools
 import unittest
 from collections import namedtuple
+
+from .examples import GRAPH_3_7, GRAPH_9_3
 
 
 class SortTestBase:
@@ -361,63 +362,3 @@ class KnapsackTestBase:
                 Item(v=40, w=60), Item(v=48, w=14), Item(v=74, w=29)
             }
         )
-
-
-# Figure 3.7 on page 117
-GRAPH_3_7 = {
-    'a': [('b', 2), ('c', 5), ('d', 7)],
-    'b': [('a', 2), ('c', 8), ('d', 3)],
-    'c': [('a', 5), ('b', 8), ('d', 1)],
-    'd': [('a', 7), ('b', 3), ('c', 1)],
-}
-
-
-# Figure 3.10 on page 123
-GRAPH_3_10 = {
-    'a': ['c', 'd', 'e'],
-    'b': ['e', 'f'],
-    'c': ['a', 'd', 'f'],
-    'd': ['a', 'c'],
-    'e': ['a', 'b', 'f'],
-    'f': ['b', 'c', 'e'],
-    'g': ['h', 'j'],
-    'h': ['i', 'g'],
-    'i': ['h', 'j'],
-    'j': ['i', 'g'],
-}
-
-
-# Figure 3.12a on page 127
-GRAPH_3_12A = {
-    'a': ['b', 'e'],
-    'b': ['a', 'c', 'f'],
-    'c': ['b', 'd', 'g'],
-    'd': ['c', 'h'],
-    'e': ['a', 'f'],
-    'f': ['b', 'e', 'g'],
-    'g': ['c', 'f', 'h'],
-    'h': ['d', 'g'],
-}
-
-
-# Figure 3.12b on page 127
-GRAPH_3_12B = {
-    'a': ['b', 'e'],
-    'b': ['a', 'c', 'f'],
-    'c': ['b', 'd', 'g'],
-    'd': ['c'],
-    'e': ['a'],
-    'f': ['b'],
-    'g': ['c'],
-}
-
-
-# Figure 9.3 on page 321
-GRAPH_9_3 = {
-    'a': [('b', 3), ('f', 5), ('e', 6)],
-    'b': [('a', 3), ('c', 1), ('f', 4)],
-    'c': [('b', 1), ('d', 6), ('f', 4)],
-    'd': [('c', 6), ('e', 8), ('f', 5)],
-    'e': [('a', 6), ('d', 8), ('f', 2)],
-    'f': [('a', 5), ('b', 4), ('c', 4), ('d', 5), ('e', 8)],
-}

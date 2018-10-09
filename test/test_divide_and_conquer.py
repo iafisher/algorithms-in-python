@@ -1,7 +1,7 @@
 import unittest
 
 from algorithms.divide_and_conquer import merge, merge_sort
-from .helper import StableSortTestBase
+from .base import StableSortTestBase
 
 
 class MergeSortTest(unittest.TestCase, StableSortTestBase):

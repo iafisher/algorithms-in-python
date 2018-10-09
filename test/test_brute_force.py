@@ -2,13 +2,17 @@ import unittest
 
 from algorithms.brute_force import (
     breadth_first_search, bubble_sort, closest_pair, convex_hull,
-    depth_first_search, find_substring, knapsack, linear_search, permutations,
-    selection_sort, traveling_salesman,
+    depth_first_search, detect_cycle, find_substring, knapsack, linear_search,
+    permutations, selection_sort, traveling_salesman,
 )
-from .helper import (
+from .base import (
     ClosestPairTestBase, ConvexHullTestBase, FindSubstringTestBase,
     KnapsackTestBase, StableSortTestBase, SortTestBase,
-    TravelingSalesmanTestBase, GRAPH_3_10, GRAPH_3_12A, GRAPH_3_12B,
+    TravelingSalesmanTestBase, 
+)
+from .examples import (
+    GRAPH_3_7, GRAPH_3_10, GRAPH_3_12A, GRAPH_3_12B, GRAPH_4_5, 
+    GRAPH_4_2_EX_1A, GRAPH_4_2_EX_1B, GRAPH_4_6,
 )
 
 
@@ -58,6 +62,26 @@ class DepthFirstSearchTest(unittest.TestCase):
         vertices = list(depth_first_search(GRAPH_3_12B))
         self.assertEqual(vertices, ['a', 'b', 'c', 'd', 'g', 'f', 'e'])
 
+    def test_graph_4_5(self):
+        # Note that this is not the only valid DFS traversal of this graph.
+        vertices = list(depth_first_search(GRAPH_4_5))
+        self.assertEqual(vertices, ['a', 'b', 'c', 'd', 'e'])
+
+    def test_graph_4_6(self):
+        # Note that this is not the only valid DFS traversal of this graph.
+        vertices = list(depth_first_search(GRAPH_4_6))
+        self.assertEqual(vertices, ['C1', 'C3', 'C4', 'C5', 'C2'])
+
+    def test_graph_4_2_ex_1a(self):
+        # Note that this is not the only valid DFS traversal of this graph.
+        vertices = list(depth_first_search(GRAPH_4_2_EX_1A))
+        self.assertEqual(vertices, ['a', 'b', 'e', 'g', 'f', 'c', 'd'])
+
+    def test_graph_4_2_ex_1b(self):
+        # Note that this is not the only valid DFS traversal of this graph.
+        vertices = list(depth_first_search(GRAPH_4_2_EX_1B))
+        self.assertEqual(vertices, ['a', 'b', 'c', 'd', 'g', 'e', 'f'])
+
 
 class BreadthFirstSearchTest(unittest.TestCase):
     def test_graph_3_10(self):
@@ -76,6 +100,26 @@ class BreadthFirstSearchTest(unittest.TestCase):
         # Note that this is not the only valid BFS traversal of this graph.
         vertices = list(breadth_first_search(GRAPH_3_12B))
         self.assertEqual(vertices, ['a', 'b', 'e', 'c', 'f', 'd', 'g'])
+
+    def test_graph_4_5(self):
+        # Note that this is not the only valid BFS traversal of this graph.
+        vertices = list(breadth_first_search(GRAPH_4_5))
+        self.assertEqual(vertices, ['a', 'b', 'c', 'd', 'e'])
+
+    def test_graph_4_6(self):
+        # Note that this is not the only valid BFS traversal of this graph.
+        vertices = list(breadth_first_search(GRAPH_4_6))
+        self.assertEqual(vertices, ['C1', 'C3', 'C4', 'C5', 'C2'])
+
+    def test_graph_4_2_ex_1a(self):
+        # Note that this is not the only valid BFS traversal of this graph.
+        vertices = list(breadth_first_search(GRAPH_4_2_EX_1A))
+        self.assertEqual(vertices, ['a', 'b', 'c', 'e', 'g', 'f', 'd'])
+
+    def test_graph_4_2_ex_1b(self):
+        # Note that this is not the only valid BFS traversal of this graph.
+        vertices = list(breadth_first_search(GRAPH_4_2_EX_1B))
+        self.assertEqual(vertices, ['a', 'b', 'c', 'd', 'g', 'e', 'f'])
 
 
 class ClosestPairTest(unittest.TestCase, ClosestPairTestBase):
@@ -134,3 +178,29 @@ class PermutationsTest(unittest.TestCase):
 class KnapsackTest(unittest.TestCase, KnapsackTestBase):
     def setUp(self):
         self.algorithm = knapsack
+
+
+class DetectCycleTest(unittest.TestCase):
+    def test_graph_3_7(self):
+        self.assertTrue(detect_cycle(GRAPH_3_7))
+
+    def test_graph_3_10(self):
+        self.assertTrue(detect_cycle(GRAPH_3_10))
+
+    def test_graph_3_12a(self):
+        self.assertTrue(detect_cycle(GRAPH_3_12A))
+
+    def test_graph_3_12b(self):
+        self.assertTrue(detect_cycle(GRAPH_3_12B))
+
+    def test_graph_4_5(self):
+        self.assertTrue(detect_cycle(GRAPH_4_5))
+
+    def test_graph_4_6(self):
+        self.assertFalse(detect_cycle(GRAPH_4_6))
+
+    def test_graph_4_2_ex_1a(self):
+        self.assertFalse(detect_cycle(GRAPH_4_2_EX_1A))
+
+    def test_graph_4_2_ex_1b(self):
+        self.assertTrue(detect_cycle(GRAPH_4_2_EX_1B))

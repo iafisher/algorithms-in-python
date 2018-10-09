@@ -3,7 +3,7 @@ import unittest
 from algorithms.decrease_and_conquer import (
     binary_search, insertion_sort, subsets
 )
-from .helper import StableSortTestBase
+from .base import StableSortTestBase
 
 
 class BinarySearchTest(unittest.TestCase):
